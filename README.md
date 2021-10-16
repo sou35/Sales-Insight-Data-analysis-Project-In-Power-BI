@@ -1,2 +1,58 @@
 # Sales-Insight-Data-analysis-Project-In-Power-BI
-AtliQ hardware is a company which supplies computer hardware and peripherals to many of the client.They have this client called Excel stores, normal stores, surge stores across India and they supply all these equipment’s to them now ethnic Hardware has head office in Delhi and then they have a lot of regional offices throughout the India. Now bhavan Patel is a sales director for this company and He’s facing a lot of challenges so the challenge is this the marketing is growing dynamically and then he is facing issue in terms tracking the sales in this dynamically growing marketing and He having issues with the insights of the business so he has this Regional Managers for North India, South India and Central India. Whenever he wants to get insights in these three region he would call these people and on the phone this local region manger will give him some insights that okay this was the sales last quarters and we are going to grow by this much in the next quarter the problem is the conversation which are happening  they are all are verbal and you know there is the habit that all the mangers have which is they try to paint a rosy picture you known they do not want to look bad some times they will lie or even if they are not lying they will try to sugarcoat the fact so bhavan Patel who is a sales director is extremely frustrated with this because he sees that overall the sales are declining but when he is talking with his regional mangers he is not getting a complete picture when he asked for numbers what these people will do is they will give him a lot of Excel file and AtliQ hardware is a pretty big business and they have so  many clients so that these Excel files that you get there are so many Excel files with so many rows in it . And behind put it is very frustrated he is like why are giving me the 69 Excel files just tell me in simplistic terms how our business is doing what are the biggest areas where we need to focus you know so if there is a region where the sales numbers are declining maybe we can start some promotion offer or maybe we can engage with customers in a more better way so that we can increase of curselves so he is interested in getting a simple understandable digestible insights but what these guys are giving is so many suffice and you know we as humans cannot consume so much numbers actually so there is a saying which says a picture is worth a thousand words.so he is more interested in a dashboard which he can go and he can look at the real data because data will speak the truth okay so if the data is coming from a correct source and if you build a visualization such as shown in this image for buying Patel it become very essay now he can lately he can come office and he can open this chart you know he can see what how the numbers are trending he can also set monthly email remainder where you know at the end of the month power bi will send him an email saying  that this is how the business looks basically in terms of revenues customers and so on that way now bhavin does not  have to call these mangers and whatever information he is getting from power bi will be the actual information it will be telling him the truth and then as a sales director he can make data driven decision and this data driven decision will help him increase the sales for his company.
+## Instructions to setup mysql on your local computer
+1.Follow step in this Documentation to install mysql on your local computer [MySQL Installation Guide](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/)
+
+2.SQL database dump is in db_dump.sql file above. Download [db_dump.sql](db_dump.sql) file to your local computer and import it .
+
+## Data Analysis Using SQL
+### Show all customer records
+```
+SELECT * FROM customers;
+```
+
+### Show total number of customers
+```
+SELECT count(*) FROM customers;
+```
+
+### Show transactions for Chennai market (market code for chennai is Mark001)
+```
+SELECT * FROM transactions where market_code='Mark001';
+```
+### Show distrinct product codes that were sold in chennai
+```
+SELECT distinct product_code FROM transactions where market_code='Mark001';
+```
+### Show transactions where currency is US dollars
+```
+SELECT * from transactions where currency="USD"
+```
+
+### Show transactions in 2020 join by date table
+```
+SELECT transactions.*, date.* FROM transactions INNER JOIN date ON transactions.order_date=date.date where date.year=2020;
+```
+### Show total revenue in year 2020,
+```
+SELECT SUM(transactions.sales_amount) FROM transactions INNER JOIN date ON transactions.order_date=date.date
+ where date.year=2020 and transactions.currency='INR\r' or transactions.currency='USD\r';
+```
+### Show total revenue in year 2020, January Month,
+```
+SELECT SUM(transactions.sales_amount) FROM transactions INNER JOIN date ON transactions.order_date=date.date where date.year=2020 and date.month_name="January" and (transactions.currency="INR\r" or transactions.currency="USD\r");
+```
+### Show total revenue in year 2020 in Chennai
+```
+SELECT SUM(transactions.sales_amount) FROM transactions INNER JOIN date ON transactions.order_date=date.date where date.year=2020 and transactions.market_code="Mark001";
+
+select*from transactions where transactions.currency*'USD\r' or transactions.currency*'USD';
+```
+### Duplicate currency value
+```
+SELECT SUM(transactions.sales_amount) FROM transactions INNER JOIN date ON transactions.order_date=date.date
+ where date.year=2020 and (transactions.currency='INR\r' or transactions.currency='USD\r');
+ ```
+ ```
+SELECT SUM(transactions.sales_amount) FROM transactions INNER JOIN date ON transactions.order_date=date.date
+ where date.year=2020 and date.month_name='January' and (transactions.currency='INR\r' or transactions.currency='USD\r');
+ ```
